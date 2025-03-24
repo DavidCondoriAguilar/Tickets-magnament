@@ -5,15 +5,17 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Table(name = "eventos")
-@Getter @Setter
-@NoArgsConstructor @AllArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
-@Data
 public class Evento {
 
     @Id
@@ -37,10 +39,10 @@ public class Evento {
     private EstadoEvento estado;
 
     @OneToMany(mappedBy = "evento", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Ticket> tickets;
+    private List<Ticket> tickets = new ArrayList<>();
 
-    @OneToMany(mappedBy = "evento", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Zona> zonas;
+    @OneToMany(mappedBy = "evento", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<Zona> zonas = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(
@@ -48,6 +50,16 @@ public class Evento {
             joinColumns = @JoinColumn(name = "evento_id"),
             inverseJoinColumns = @JoinColumn(name = "usuario_id")
     )
-    private List<Usuario> usuarios;
+    private List<Usuario> usuarios = new ArrayList<>();
 
+//    public void setZonas(List<Zona> nuevasZonas) {
+//        if (nuevasZonas == null) {
+//            this.zonas.clear();
+//            return;
+//        }
+//        this.zonas.forEach(zona -> zona.setEvento(null)); // Desasocia las antiguas
+//        this.zonas.clear();
+//        nuevasZonas.forEach(zona -> zona.setEvento(this)); // Asocia las nuevas
+//        this.zonas.addAll(nuevasZonas);
+//    }
 }
