@@ -3,6 +3,7 @@ package com.tickets.rave_tix.model;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -15,4 +16,5 @@ public class ZonaModel {
     private String nombre;
     private Integer capacidad;
     private BigDecimal precioBase;
+    private List<String> beneficios;
 }

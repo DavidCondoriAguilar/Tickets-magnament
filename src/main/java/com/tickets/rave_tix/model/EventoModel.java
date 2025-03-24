@@ -1,16 +1,16 @@
 package com.tickets.rave_tix.model;
 
+import com.tickets.rave_tix.domain.enums.EstadoEvento;
 import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
-@Getter
-@Setter
+@Builder
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class EventoModel {
     private UUID id;
     private String nombre;
@@ -19,6 +19,7 @@ public class EventoModel {
     private LocalDateTime fechaFin;
     private String ubicacion;
     private Integer capacidadMaxima;
-    private String estado;
+    private EstadoEvento estado;
     private List<ZonaModel> zonas;
+
 }

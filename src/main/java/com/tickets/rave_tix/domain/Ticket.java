@@ -36,4 +36,10 @@ public class Ticket {
     @Enumerated(EnumType.STRING)
     private EstadoTicket estado;
 
+    @ManyToOne
+    @JoinColumn(name = "zona_id")
+    private Zona zona;
+
+    private String fechaCompra;
+
 }

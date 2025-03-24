@@ -16,4 +16,8 @@ public class TicketModel {
     private BigDecimal precio;
     private String qrCode;
     private String estado;
+    private UUID zonaId;
+    private String fechaCompra;
+    private EventoModel evento;
+    private ZonaModel zona;
 }
