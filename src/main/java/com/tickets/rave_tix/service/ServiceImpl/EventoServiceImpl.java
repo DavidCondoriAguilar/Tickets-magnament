@@ -34,22 +34,24 @@ public class EventoServiceImpl implements EventoService {
                 .zonas(Collections.emptyList()) // Inicializamos con lista vacía
                 .build();
 
-        evento = eventoRepository.save(evento); // ✅ Guardar antes de asignar zonas
+        evento = eventoRepository.save(evento);
 
         // 2. Si hay zonas, las creamos con el evento asignado
         if (eventoModel.getZonas() != null && !eventoModel.getZonas().isEmpty()) {
-            final Evento eventoFinal = evento; // ✅ Hacemos una variable final
+
+            final Evento eventoFinal = evento;
+
             List<Zona> zonas = eventoModel.getZonas().stream()
                     .map(zonaModel -> Zona.builder()
                             .nombre(zonaModel.getNombre())
                             .capacidad(zonaModel.getCapacidad())
                             .precioBase(zonaModel.getPrecioBase())
-                            .beneficios(zonaModel.getBeneficios())
-                            .evento(eventoFinal) // ✅ Ahora sí se puede usar en la lambda
+                            .beneficios(String.valueOf(zonaModel.getBeneficios()))
+                            .evento(eventoFinal)
                             .build())
                     .collect(Collectors.toList());
             evento.setZonas(zonas);
-            evento = eventoRepository.save(evento); // ✅ Guardamos con las zonas
+            evento = eventoRepository.save(evento);
         }
 
         return convertirAEventoModel(evento);
@@ -114,7 +116,7 @@ public class EventoServiceImpl implements EventoService {
                                 .nombre(zona.getNombre())
                                 .capacidad(zona.getCapacidad())
                                 .precioBase(zona.getPrecioBase())
-                                .beneficios(zona.getBeneficios())
+                                .beneficios(Collections.singletonList(zona.getBeneficios()))
                                 .build())
                         .collect(Collectors.toList())
                         : Collections.emptyList()) // Retorna [] en lugar de null

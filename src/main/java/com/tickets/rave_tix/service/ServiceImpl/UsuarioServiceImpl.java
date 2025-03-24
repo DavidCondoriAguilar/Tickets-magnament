@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -151,7 +152,7 @@ public class UsuarioServiceImpl implements UsuarioService {
                                 .nombre(ticket.getZona().getNombre())
                                 .capacidad(ticket.getZona().getCapacidad())
                                 .precioBase(ticket.getZona().getPrecioBase())
-                                .beneficios(ticket.getZona().getBeneficios())
+                                .beneficios(Collections.singletonList(ticket.getZona().getBeneficios()))
                                 .build())
                         .precio(ticket.getPrecio())
                         .fechaCompra(ticket.getFechaCompra())

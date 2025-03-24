@@ -28,6 +28,5 @@ public class Zona {
 
     private BigDecimal precioBase;
 
-    @ElementCollection
-    private List<String> beneficios;
+    private String beneficios;
 }
